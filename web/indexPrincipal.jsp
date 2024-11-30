@@ -62,15 +62,17 @@
 <body>
     <div class="container">
         <h1>Gestión de Productos</h1>
+        <!-- Formulario para las acciones principales -->
         <form action="ControllerServlet" method="post">
             <!-- Campo de texto para ingresar el nombre del producto -->
-            <input type="text" name="productName" placeholder="Nombre del producto" required>
+            <input type="text" name="productName" placeholder="Nombre del producto">
 
             <!-- Botones de acción -->
             <button type="submit" name="action" value="add">Agregar</button>
             <button type="submit" name="action" value="search">Buscar</button>
 
-            <!-- Botón para ver la base de datos -->
+            <!-- Contraseña para Ver DB -->
+            <input type="password" name="password" placeholder="Contraseña para Ver DB">
             <button type="submit" name="action" value="viewDB" class="view-db">Ver DB</button>
         </form>
     </div>

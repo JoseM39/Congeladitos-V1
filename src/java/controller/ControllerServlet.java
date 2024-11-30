@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class ControllerServlet extends HttpServlet {
 
     // Contraseña válida para acceder a "Ver DB"
-    private static final String DB_PASSWORD = "dbpassword123";
+    private static final String DB_PASSWORD = "dbpass123";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

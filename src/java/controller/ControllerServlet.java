@@ -49,7 +49,31 @@ public class ControllerServlet extends HttpServlet {
             // Pasar la lista de productos a la vista
             request.setAttribute("productos", productos);
             request.getRequestDispatcher("viewDB.jsp").forward(request, response);
+        }else if ("order".equals(action)) {
+    // Lógica para "Ordenar"
+    String productName = request.getParameter("productName");
+    String orderQuantityStr = request.getParameter("orderQuantity");
+
+    if (productName != null && orderQuantityStr != null) {
+        int orderQuantity = Integer.parseInt(orderQuantityStr);
+        for (Product producto : productos) {
+            if (producto.getNombre().equalsIgnoreCase(productName)) {
+                if (producto.getCantidad() >= orderQuantity) {
+                    // Restar la cantidad ordenada
+                    producto.setCantidad(producto.getCantidad() - orderQuantity);
+                    request.setAttribute("successMessage", "La orden se realizó exitosamente.");
+                } else {
+                    // Cantidad insuficiente
+                    request.setAttribute("errorMessage", "Cantidad insuficiente para completar la orden.");
+                }
+                request.setAttribute("producto", producto);
+                request.getRequestDispatcher("productoDetalles.jsp").forward(request, response);
+                return;
+            }
         }
+    }
+    response.sendRedirect("indexPrincipal.jsp");
+}
         
         if ("viewDB".equals(action)) {
             // Manejar la acción "Ver DB"

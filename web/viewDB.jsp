@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -56,21 +57,12 @@
 <body>
     <h1>Base de Datos de Productos</h1>
     <div class="product-list">
-        <div class="product-item">
-            <p><strong>ID:</strong> 1</p>
-            <p><strong>Nombre del Producto:</strong> Producto A</p>
-            <p><strong>Cantidad Disponible:</strong> 50</p>
-        </div>
-        <div class="product-item">
-            <p><strong>ID:</strong> 2</p>
-            <p><strong>Nombre del Producto:</strong> Producto B</p>
-            <p><strong>Cantidad Disponible:</strong> 30</p>
-        </div>
-        <div class="product-item">
-            <p><strong>ID:</strong> 3</p>
-            <p><strong>Nombre del Producto:</strong> Producto C</p>
-            <p><strong>Cantidad Disponible:</strong> 20</p>
-        </div>
+        <c:forEach var="producto" items="${productos}">
+            <div class="product-item">
+                <p><strong>Nombre del Producto:</strong> ${producto.nombre}</p>
+                <p><strong>Cantidad Disponible:</strong> ${producto.cantidad}</p>
+            </div>
+        </c:forEach>
     </div>
     <div class="btn-container">
         <form action="indexPrincipal.jsp" method="get">
@@ -79,4 +71,3 @@
     </div>
 </body>
 </html>
-

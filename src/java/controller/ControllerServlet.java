@@ -35,6 +35,16 @@ public class ControllerServlet extends HttpServlet {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("indexPrincipal.jsp");
                 dispatcher.forward(request, response);
             }
+        } else if ("search".equals(action)) {
+            // Lógica para "Buscar"
+            String productName = request.getParameter("productName");
+            if (productName != null && !productName.trim().isEmpty()) {
+                buscarProducto(productName.trim(), request, response);
+            } else {
+                request.setAttribute("errorMessage", "Debe ingresar un nombre de producto.");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("indexPrincipal.jsp");
+                dispatcher.forward(request, response);
+            }
         } else if ("viewDB".equals(action)) {
             // Pasar la lista de productos a la vista
             request.setAttribute("productos", productos);
@@ -70,6 +80,22 @@ public class ControllerServlet extends HttpServlet {
         }
         // Agregar nuevo producto si no existe
         productos.add(new Product(productName, 1));
+    }
+    private void buscarProducto(String productName, HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        for (Product producto : productos) {
+            if (producto.getNombre().equalsIgnoreCase(productName)) {
+                // Producto encontrado, redirigir a la página de detalles
+                request.setAttribute("producto", producto);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("productoDetalles.jsp");
+                dispatcher.forward(request, response);
+                return;
+            }
+        }
+        // Producto no encontrado, mostrar error
+        request.setAttribute("errorMessage", "El producto no existe o el nombre es incorrecto.");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("indexPrincipal.jsp");
+        dispatcher.forward(request, response);
     }
 }
 

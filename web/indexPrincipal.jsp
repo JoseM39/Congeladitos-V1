@@ -70,7 +70,12 @@
             <!-- Botones de acción -->
             <button type="submit" name="action" value="add">Agregar</button>
             <button type="submit" name="action" value="search">Buscar</button>
+            
+            <c:if test="${not empty errorMessage}">
+    <div class="error-message">${errorMessage}</div>
+</c:if>
 
+            
             <!-- Contraseña para Ver DB -->
             <input type="password" name="password" placeholder="Contraseña para Ver DB">
             <button type="submit" name="action" value="viewDB" class="view-db">Ver DB</button>
